@@ -4,79 +4,96 @@ import javax.swing.JOptionPane;
 
 public class App {
 
-    static String valor1;
-    static String valor2;
+    static double valor1;
+    static double valor2;
 
-    public static void main(String[] args) throws Exception {
+    private static final int OPERACAO_SOMA = 1;
+    private static final int OPERACAO_SUBTRACAO = 2;
+    private static final int OPERACAO_DIVISAO = 3;
+    private static final int OPERACAO_MULTIPLICACAO = 4;
+    private static final int OPERACAO_DIFERENCA = 5;
+    private static final int OPERACAO_SAIDA = 9;
+    static double resultado;
 
-        double resultado;
+
+    public static void main(String[] args) {
+
+
         boolean valida = true;
 
 
-       while (valida) {
+        while (valida) {
 
-           try {
+            try {
 
-               String dado = JOptionPane.showInputDialog("Selecione um tipo de operação: \nSoma: 1 \nSubtração: 2 \nDivisão: 3 \nMultiplicação: 4 \nFechar: 5");
+                int operacao = Integer.parseInt(JOptionPane.showInputDialog("Selecione um tipo de operação: \nSoma: 1 \nSubtração: 2 \nDivisão: 3 \nMultiplicação: 4 \nDiferença de Valores: 5 \nFechar: 9"));
+                String descricaoResultado = "Resultado da Operação: ";
 
-               switch (dado) {
-                   case "1":
-                       dadosCalculo();
-                       resultado = Double.parseDouble(valor1) + Double.parseDouble(valor2);
-                       JOptionPane.showMessageDialog(null, "Resultado da operação " + resultado);
-                       break;
+                switch (operacao) {
 
-                   case "2":
-                       dadosCalculo();
-                       resultado = Double.parseDouble(valor1) - Double.parseDouble(valor2);
-                       JOptionPane.showMessageDialog(null, "Resultado da operação " + resultado);
-                       break;
+                    case OPERACAO_SOMA: {
+                        dadosCalculo();
+                        resultado = soma();
+                        JOptionPane.showMessageDialog(null, descricaoResultado + resultado);
+                        break;
+                    }
 
-                   case "3":
-                       dadosCalculo();
-                       resultado = Double.parseDouble(valor1) / Double.parseDouble(valor2);
-                       JOptionPane.showMessageDialog(null, "Resultado da operação " + resultado);
-                       break;
+                    case OPERACAO_SUBTRACAO: {
+                        dadosCalculo();
+                        resultado = valor1 - valor2;
+                        JOptionPane.showMessageDialog(null, descricaoResultado + resultado);
+                        break;
+                    }
 
-                   case "4":
-                       dadosCalculo();
-                       resultado = Double.parseDouble(valor1) * Double.parseDouble(valor2);
-                       JOptionPane.showMessageDialog(null, "Resultado da operação " + resultado);
-                       break;
+                    case OPERACAO_DIVISAO: {
+                        dadosCalculo();
+                        resultado = valor1 / valor2;
+                        JOptionPane.showMessageDialog(null, descricaoResultado + resultado);
+                        break;
+                    }
 
-                   case "5":
-                       JOptionPane.showMessageDialog(null, "Até Mais!!!");
-                       valida = false;
-                       break;
+                    case OPERACAO_MULTIPLICACAO: {
+                        dadosCalculo();
+                        resultado = valor1 * valor2;
+                        JOptionPane.showMessageDialog(null, descricaoResultado + resultado);
+                        break;
+                    }
 
-                   default:
-                       JOptionPane.showMessageDialog(null, "Valor incorreto!! tente novamente");
-               }
-           }catch (Exception e){
-               JOptionPane.showMessageDialog(null, "Erro ao inserir os dados: " + e);
-           }
-       }
-    }
+                    case OPERACAO_DIFERENCA: {
+                        dadosDiferenca();
+                        JOptionPane.showMessageDialog(null, descricaoResultado + resultado);
+                        break;
+                    }
 
-    public static void dadosCalculo(){
-        boolean validaNumero = true;
+                    case OPERACAO_SAIDA: {
+                        JOptionPane.showMessageDialog(null, "Até Mais!!!");
+                        valida = false;
+                        break;
+                    }
 
-        while (validaNumero) {
-
-            valor1 = (JOptionPane.showInputDialog("Insira o primeiro número"));
-
-            if (!valor1.matches("\\d+")){
-                JOptionPane.showMessageDialog(null, "Digite apenas números!!");
-                validaNumero = false;
-            }else {
-                valor2 = (JOptionPane.showInputDialog("Insira o segundo número"));
-
-                if (!valor2.matches("\\d+")){
-                    JOptionPane.showMessageDialog(null, "Digite apenas números!!");
-                    validaNumero = false;
-
+                    default:
+                        JOptionPane.showMessageDialog(null, "Valor incorreto!! tente novamente");
                 }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Insira somente números nestes campos");
             }
         }
     }
+
+    private static double soma() {
+        return valor1 + valor2;
+    }
+
+    public static void dadosCalculo() {
+        valor1 = (Double.parseDouble(JOptionPane.showInputDialog("Insira o primeiro número")));
+        valor2 = (Double.parseDouble(JOptionPane.showInputDialog("Insira o segundo número")));
+    }
+
+    public static void dadosDiferenca() {
+        dadosCalculo();
+        double valor3 = (Double.parseDouble(JOptionPane.showInputDialog("Insira o terceiro número")));
+        double valor4 = (Double.parseDouble(JOptionPane.showInputDialog("Insira o quarto número")));
+        resultado = (valor1 * valor2) - (valor3 * valor4);
+    }
+
 }
