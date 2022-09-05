@@ -6,21 +6,18 @@ public class App {
 
     static double valor1;
     static double valor2;
-
+    static double resultado;
     private static final int OPERACAO_SOMA = 1;
     private static final int OPERACAO_SUBTRACAO = 2;
     private static final int OPERACAO_DIVISAO = 3;
     private static final int OPERACAO_MULTIPLICACAO = 4;
     private static final int OPERACAO_DIFERENCA = 5;
     private static final int OPERACAO_SAIDA = 9;
-    static double resultado;
 
 
     public static void main(String[] args) {
 
-
         boolean valida = true;
-
 
         while (valida) {
 
@@ -40,21 +37,21 @@ public class App {
 
                     case OPERACAO_SUBTRACAO: {
                         dadosCalculo();
-                        resultado = valor1 - valor2;
+                        resultado = subtracao();
                         JOptionPane.showMessageDialog(null, descricaoResultado + resultado);
                         break;
                     }
 
                     case OPERACAO_DIVISAO: {
                         dadosCalculo();
-                        resultado = valor1 / valor2;
+                        resultado = divisao();
                         JOptionPane.showMessageDialog(null, descricaoResultado + resultado);
                         break;
                     }
 
                     case OPERACAO_MULTIPLICACAO: {
                         dadosCalculo();
-                        resultado = valor1 * valor2;
+                        resultado = multiplicacao();
                         JOptionPane.showMessageDialog(null, descricaoResultado + resultado);
                         break;
                     }
@@ -80,7 +77,21 @@ public class App {
         }
     }
 
+    private static double multiplicacao() {
+        return valor1 * valor2;
+    }
+
+    private static double divisao() {
+        return valor1 / valor2;
+    }
+
+    private static double subtracao() {
+
+        return valor1 - valor2;
+    }
+
     private static double soma() {
+
         return valor1 + valor2;
     }
 
@@ -93,7 +104,7 @@ public class App {
         dadosCalculo();
         double valor3 = (Double.parseDouble(JOptionPane.showInputDialog("Insira o terceiro número")));
         double valor4 = (Double.parseDouble(JOptionPane.showInputDialog("Insira o quarto número")));
-        resultado = (valor1 * valor2) - (valor3 * valor4);
+        resultado = multiplicacao() - (valor3 * valor4);
     }
 
 }
